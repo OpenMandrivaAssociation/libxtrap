@@ -1,50 +1,59 @@
-%define libxtrap %mklibname xtrap 6
-Name: libxtrap
-Summary:  X Trap Library
-Version: 1.0.0
-Release: %mkrel 3
-Group: Development/X11
-License: MIT
-URL: http://xorg.freedesktop.org
-Source0: http://xorg.freedesktop.org/releases/individual/lib/libXTrap-%{version}.tar.bz2
-BuildRoot: %{_tmppath}/%{name}-root
+%define name	libxtrap
+%define version	1.0.0
+%define release	%mkrel 4
 
-BuildRequires: libx11-devel >= 1.0.0
-BuildRequires: libxext-devel >= 1.0.0
-BuildRequires: libxt-devel >= 1.0.0
-BuildRequires: x11-proto-devel >= 1.0.0
-BuildRequires: x11-util-macros >= 1.0.1
+%define major		6
+%define libname		%mklibname xtrap %{major}
+%define develname	%mklibname xtrap -d
+%define staticname	%mklibname xtrap -d -s
+
+Name:		%{name}
+Summary:	X Trap Library
+Version:	%{version}
+Release:	%{release}
+Group:		Development/X11
+License:	MIT
+URL:		http://xorg.freedesktop.org
+Source0:	http://xorg.freedesktop.org/releases/individual/lib/libXTrap-%{version}.tar.bz2
+BuildRoot:	%{_tmppath}/%{name}-root
+
+BuildRequires:	libx11-devel >= 1.0.0
+BuildRequires:	libxext-devel >= 1.0.0
+BuildRequires:	libxt-devel >= 1.0.0
+BuildRequires:	x11-proto-devel >= 1.0.0
+BuildRequires:	x11-util-macros >= 1.0.1
 
 %description
-X Trap Library
+X Trap Library.
 
 #-----------------------------------------------------------
 
-%package -n %{libxtrap}
+%package -n %{libname}
 Summary:  X Trap Library
 Group: Development/X11
 Conflicts: libxorg-x11 < 7.0
 Provides: %{name} = %{version}
 
-%description -n %{libxtrap}
+%description -n %{libname}
 X Trap Library
 
 #-----------------------------------------------------------
 
-%package -n %{libxtrap}-devel
+%package -n %{develname}
 Summary: Development files for %{name}
 Group: Development/X11
 
-Requires: %{libxtrap} = %{version}
+Requires: %{libname} = %{version}
 Requires: x11-proto-devel >= 1.0.0
-Provides: libxtrap-devel = %{version}-%{release}
+Provides: %{name}-devel = %{version}-%{release}
+Obsoletes: %{mklibname xtrap 6 -d}
 
 Conflicts: libxorg-x11-devel < 7.0
 
-%description -n %{libxtrap}-devel
+%description -n %{develname}
 Development files for %{name}
 
-%files -n %{libxtrap}-devel
+%files -n %{develname}
 %defattr(-,root,root)
 %{_libdir}/libXTrap.so
 %{_libdir}/libXTrap.la
@@ -52,18 +61,18 @@ Development files for %{name}
 
 #-----------------------------------------------------------
 
-%package -n %{libxtrap}-static-devel
+%package -n %{staticname}
 Summary: Static development files for %{name}
 Group: Development/X11
-Requires: %{libxtrap}-devel = %{version}
-Provides: libxtrap-static-devel = %{version}-%{release}
+Requires: %{develname} = %{version}
+Provides: %{name}-static-devel = %{version}-%{release}
 
 Conflicts: libxorg-x11-static-devel < 7.0
 
-%description -n %{libxtrap}-static-devel
+%description -n %{staticname}
 Static development files for %{name}
 
-%files -n %{libxtrap}-static-devel
+%files -n %{staticname}
 %defattr(-,root,root)
 %{_libdir}/libXTrap.a
 
@@ -88,9 +97,7 @@ rm -rf %{buildroot}
 %post -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
 
-%files -n %{libxtrap}
+%files -n %{libname}
 %defattr(-,root,root)
-%{_libdir}/libXTrap.so.6
-%{_libdir}/libXTrap.so.6.4.0
-
+%{_libdir}/libXTrap.so.%{major}*
 
