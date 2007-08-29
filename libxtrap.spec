@@ -1,6 +1,6 @@
 %define name	libxtrap
 %define version	1.0.0
-%define release	%mkrel 4
+%define release	%mkrel 5
 
 %define major		6
 %define libname		%mklibname xtrap %{major}
@@ -66,6 +66,7 @@ Summary: Static development files for %{name}
 Group: Development/X11
 Requires: %{develname} = %{version}
 Provides: %{name}-static-devel = %{version}-%{release}
+Obsoletes: %{mklibname xtrap 6 -s -d}
 
 Conflicts: libxorg-x11-static-devel < 7.0
 
