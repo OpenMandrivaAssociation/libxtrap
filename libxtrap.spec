@@ -1,6 +1,6 @@
 %define name		libxtrap
 %define version		1.0.0
-%define release		%mkrel 8
+%define release		%mkrel 9
 
 %define major		6
 %define libname		%mklibname xtrap %{major}
