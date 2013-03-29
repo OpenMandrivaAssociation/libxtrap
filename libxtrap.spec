@@ -1,11 +1,11 @@
-%define major	6
+%define major 6
 %define libname	%mklibname xtrap %{major}
 %define devname	%mklibname xtrap -d
 
 Name:		libxtrap
 Summary:	X Trap Library
 Version:	1.0.1
-Release:	1
+Release:	2
 Group:		Development/X11
 License:	MIT
 URL:		http://xorg.freedesktop.org
@@ -26,7 +26,7 @@ Group:		Development/X11
 Provides:	%{name} = %{version}
 
 %description -n %{libname}
-X Trap Library
+X Trap Library.
 
 %package -n %{devname}
 Summary:	Development files for %{name}
@@ -35,7 +35,7 @@ Requires:	%{libname} = %{version}
 Provides:	%{name}-devel = %{version}-%{release}
 
 %description -n %{devname}
-Development files for %{name}
+Development files for %{name}.
 
 %prep
 %setup -qn libXTrap-%{version}
