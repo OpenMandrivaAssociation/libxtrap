@@ -1,0 +1,46 @@
+From 0863f57bea07a29b48c2e1cff77da17986fb8225 Mon Sep 17 00:00:00 2001
+From: Alan Coopersmith <alan.coopersmith@oracle.com>
+Date: Fri, 5 Jul 2013 23:58:26 -0700
+Subject: [PATCH 2/4] Kill VMS harder (unifdef -UVMS)
+
+Signed-off-by: Alan Coopersmith <alan.coopersmith@oracle.com>
+---
+ src/XEConTxt.c   | 3 ---
+ src/XEWrappers.c | 6 ------
+ 2 files changed, 9 deletions(-)
+
+diff --git a/src/XEConTxt.c b/src/XEConTxt.c
+index 531ced2..084077c 100644
+--- a/src/XEConTxt.c
++++ b/src/XEConTxt.c
+@@ -289,9 +289,6 @@ int XEChangeTC(XETC *tc, CARD32 mask, XETCValues *values)
+     {
+         status = XEFlushConfig(tc);
+     }
+-#ifdef VMS
+-    sys$setast(True);   /* Make sure AST's are enabled */
+-#endif /* VMS */
+     return(status);
+ }
+ 
+diff --git a/src/XEWrappers.c b/src/XEWrappers.c
+index 7deb388..39eef18 100644
+--- a/src/XEWrappers.c
++++ b/src/XEWrappers.c
+@@ -109,13 +109,7 @@ Boolean XETrapDispatchEvent(XEvent *pevent, XETC *tc)
+ XtInputMask XETrapAppPending(XtAppContext app)
+ {
+     TimerEventRec *te_ptr;
+-#ifndef VMS
+     struct timeval cur_time;
+-#else  /* vms */
+-    vms_time cur_time;
+-    long efnMask = 0L;
+-    int status;
+-#endif /* vms */
+     XtInputMask retmask = XtAppPending(app);        /* Prime XtIMEvent */
+ 
+     retmask &= ~(XtIMTimer | XtIMAlternateInput);   /* clear timer & input */
+-- 
+2.8.3
+
