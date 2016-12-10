@@ -5,12 +5,14 @@
 Name:		libxtrap
 Summary:	X Trap Library
 Version:	1.0.1
-Release:	12
+Release:	13
 Group:		Development/X11
 License:	MIT
 URL:		http://xorg.freedesktop.org
 Source0:	http://xorg.freedesktop.org/releases/individual/lib/libXTrap-%{version}.tar.bz2
-
+Patch0:		0000-Drop-VMS-support-unifdef-Uvms.patch
+Patch1:		0001-Require-ANSI-C89-pre-processor-drop-pre-C89-token-pa.patch
+Patch2:		0002-Kill-VMS-harder-unifdef-UVMS.patch
 BuildRequires:	pkgconfig(x11)
 BuildRequires:	pkgconfig(xext)
 BuildRequires:	pkgconfig(xproto)
@@ -39,9 +41,10 @@ Development files for %{name}.
 
 %prep
 %setup -qn libXTrap-%{version}
+%apply_patches
 
 %build
-%configure2_5x	\
+%configure \
 	--disable-static \
 	--x-includes=%{_includedir}\
 	--x-libraries=%{_libdir}
@@ -57,4 +60,3 @@ Development files for %{name}.
 %files -n %{devname}
 %{_libdir}/libXTrap.so
 %{_libdir}/pkgconfig/xtrap.pc
-

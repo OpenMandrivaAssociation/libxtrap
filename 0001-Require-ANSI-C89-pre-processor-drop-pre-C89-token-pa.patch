@@ -1,0 +1,45 @@
+From 689444a78bf78d3c7eee75502bdc8bcecfd2e544 Mon Sep 17 00:00:00 2001
+From: Alan Coopersmith <alan.coopersmith@oracle.com>
+Date: Fri, 5 Jul 2013 21:53:59 -0700
+Subject: [PATCH 1/4] Require ANSI C89 pre-processor, drop pre-C89 token
+ pasting support
+
+Signed-off-by: Alan Coopersmith <alan.coopersmith@oracle.com>
+---
+ src/XERqsts.c | 13 -------------
+ 1 file changed, 13 deletions(-)
+
+diff --git a/src/XERqsts.c b/src/XERqsts.c
+index 6fd6be0..a64a6c7 100644
+--- a/src/XERqsts.c
++++ b/src/XERqsts.c
+@@ -35,7 +35,6 @@ SOFTWARE.
+ #include <X11/Xproto.h>
+ #endif /* NO_DEC_BUG_FIX */
+ /* the following's a hack to support V3.1 protocol */
+-#if defined(__STDC__) && !defined(UNIXCPP)
+ #define GetOldReq(name, req, old_length) \
+         WORD64ALIGN\
+         if ((dpy->bufptr + SIZEOF(x##name##Req)) > dpy->bufmax)\
+@@ -46,18 +45,6 @@ SOFTWARE.
+         dpy->bufptr += old_length;\
+         dpy->request++
+ 
+-#else  /* non-ANSI C uses empty comment instead of "##" for token concat */
+-#define GetOldReq(name, req, old_length) \
+-        WORD64ALIGN\
+-        if ((dpy->bufptr + SIZEOF(x/**/name/**/Req)) > dpy->bufmax)\
+-                _XFlush(dpy);\
+-        req = (x/**/name/**/Req *)(dpy->last_req = dpy->bufptr);\
+-        req->reqType = X_/**/name;\
+-        req->length = old_length>>2;\
+-        dpy->bufptr += old_length;\
+-        dpy->request++
+-#endif
+-
+ #include <X11/Xlibint.h>
+ 
+ #include <X11/extensions/xtraplib.h>
+-- 
+2.8.3
+
