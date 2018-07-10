@@ -5,7 +5,7 @@
 Name:		libxtrap
 Summary:	X Trap Library
 Version:	1.0.1
-Release:	13
+Release:	14
 Group:		Development/X11
 License:	MIT
 URL:		http://xorg.freedesktop.org
