@@ -41,7 +41,7 @@ Development files for %{name}.
 
 %prep
 %setup -qn libXTrap-%{version}
-%apply_patches
+%autopatch -p1
 
 %build
 %configure \
