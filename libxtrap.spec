@@ -8,7 +8,7 @@ Version:	1.0.1
 Release:	16
 Group:		Development/X11
 License:	MIT
-URL:		http://xorg.freedesktop.org
+URL:		https://xorg.freedesktop.org
 Source0:	http://xorg.freedesktop.org/releases/individual/lib/libXTrap-%{version}.tar.bz2
 Patch0:		0000-Drop-VMS-support-unifdef-Uvms.patch
 Patch1:		0001-Require-ANSI-C89-pre-processor-drop-pre-C89-token-pa.patch
