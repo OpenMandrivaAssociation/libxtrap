@@ -13,6 +13,11 @@ Source0:	http://xorg.freedesktop.org/releases/individual/lib/libXTrap-%{version}
 Patch0:		0000-Drop-VMS-support-unifdef-Uvms.patch
 Patch1:		0001-Require-ANSI-C89-pre-processor-drop-pre-C89-token-pa.patch
 Patch2:		0002-Kill-VMS-harder-unifdef-UVMS.patch
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	pkgconfig(x11)
 BuildRequires:	pkgconfig(xext)
 BuildRequires:	pkgconfig(xproto)
